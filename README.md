@@ -228,10 +228,10 @@ go run ./cmd/client get minha-chave
 
 O GigaKV cumpriu com êxito o objetivo de consolidar os fundamentos teóricos de sistemas distribuídos e algoritmos de consenso tolerantes a falhas em uma implementação prática de alta performance em Go. Para a evolução do projeto rumo a um ambiente de produção de larga escala, as seguintes melhorias arquiteturais estão planejadas:
 
-- **Compactação de Log e Snapshots (`InstallSnapshot`)** — implementação de pontos de salvamento de estado (*snapshots*) para podar o histórico do WAL, evitando o crescimento indefinido do armazenamento em disco.
-- **Otimização de Leituras (Lease Read / ReadIndex)** — eliminação do *overhead* de fluxo de log em operações estritamente de leitura (`Get`), permitindo que o líder responda a consultas locais com latência adicional zero, sem violar a linearizabilidade.
-- **Proxy Transparente em Seguidores** — permitir que nós *Followers* recebam requisições de clientes e façam o encaminhamento (*proxying*) automático para o líder ativo no cluster.
-- **Integração com Motor LSM-Tree** — substituição do mapa em memória RAM por um mecanismo de armazenamento otimizado para disco baseado em *Log-Structured Merge-Tree* (como BadgerDB ou Pebble).
+- **Compactação de Log e Snapshots (`InstallSnapshot`)**, implementação de pontos de salvamento de estado (*snapshots*) para podar o histórico do WAL, evitando o crescimento indefinido do armazenamento em disco.
+- **Otimização de Leituras (Lease Read / ReadIndex)**, eliminação do *overhead* de fluxo de log em operações estritamente de leitura (`Get`), permitindo que o líder responda a consultas locais com latência adicional zero, sem violar a linearizabilidade.
+- **Proxy Transparente em Seguidores**, permitir que nós *Followers* recebam requisições de clientes e façam o encaminhamento (*proxying*) automático para o líder ativo no cluster.
+- **Integração com Motor LSM-Tree**, substituição do mapa em memória RAM por um mecanismo de armazenamento otimizado para disco baseado em *Log-Structured Merge-Tree* (como BadgerDB ou Pebble).
 
 ---
 

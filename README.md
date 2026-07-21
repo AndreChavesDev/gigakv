@@ -23,7 +23,7 @@ O **GigaKV** é um sistema de armazenamento Chave-Valor distribuído, tolerante 
 
 ---
 
-## 🎯 Visão Geral & Casos de Uso
+## Visão Geral & Casos de Uso
 
 ### O Problema da Consistência Distribuída
 Em arquiteturas de microsserviços e sistemas distribuídos, manter dados idênticos em múltiplos servidores é um desafio complexo. Se um servidor falhar, perder conexão de rede ou reiniciar, o sistema precisa continuar operando sem perder informações ou fornecer dados desatualizados (*stale reads*).
@@ -38,7 +38,7 @@ O **GigaKV** resolve esse problema fornecendo uma máquina de estados replicada.
 
 ---
 
-## 🧠 Algoritmos e Fundamentos Teóricos
+## Algoritmos e Fundamentos Teóricos
 
 ### 1. O Algoritmo de Consenso Raft
 O Raft divide o problema de consenso em três subproblemas gerenciáveis:
@@ -77,7 +77,7 @@ $$N = 2F + 1 \implies F = \left\lfloor \frac{N - 1}{2} \right\rfloor$$
 
 ---
 
-## 🏗 Arquitetura e Estrutura de Pastas
+## Arquitetura e Estrutura de Pastas
 
 A arquitetura do GigaKV é dividida em camadas bem definidas: **Interface Externa (gRPC/Protobuf)**, **Núcleo de Consenso (Raft Engine)** e **Camada de Persistência (Storage/WAL)**.
 
@@ -92,7 +92,7 @@ gigakv/
 │       └── main.go
 ├── internal/
 │   ├── raft/            # Núcleo do algoritmo Raft
-│   │   ├── node.go      # Maquina de estados, lógica do timer, eleição e commitLogs
+│   │   ├── node.go      # Máquina de estados, lógica do timer, eleição e commitLogs
 │   │   └── state.go     # Gerenciamento de papéis (Leader, Follower, Candidate)
 │   ├── storage/         # Mecanismo de persistência durável (WAL e Engine KV em memória)
 │   │   └── engine.go

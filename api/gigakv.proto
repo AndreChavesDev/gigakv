@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "gigakv/api;api";
+
+// ─── MENSAGENS DE LOG E REPLICAÇÃO ───
+message LogEntry {
+  string key = 1;
+  string value = 2;
+  int32 term = 3;
+}
+
+message AppendRequest {
+  int32 term = 1;
+  int32 leader_id = 2;
+  int64 prev_log_index = 3;  
+  int32 prev_log_term = 4;    
+  repeated LogEntry entries = 5; 
+  int64 leader_commit = 6;       
+}
+
+message AppendResponse {
+  int32 term = 1;
+  bool success = 2;
+}
+
+// ─── MENSAGENS DE ELEIÇÃO (VOTE E PRE-VOTE) ───
+message VoteRequest {
+  int32 term = 1;
+  int32 candidate_id = 2;
+  int64 last_log_index = 3;
+  int32 last_log_term = 4;
+}
+
+message VoteResponse {
+  int32 term = 1;
+  bool vote_granted = 2;
+}
+
+message PreVoteRequest {
+  int32 term = 1;
+  int32 candidate_id = 2;
+  int64 last_log_index = 3;
+  int32 last_log_term = 4;
+}
+
+message PreVoteResponse {
+  int32 term = 1;
+  bool vote_granted = 2;
+}
+
+// ─── MENSAGENS DE SNAPSHOT ───
+message InstallSnapshotRequest {
+  int32 term = 1;
+  int32 leader_id = 2;
+  int64 last_included_index = 3;
+  int32 last_included_term = 4;
+  bytes data = 5;
+}
+
+message InstallSnapshotResponse {
+  int32 term = 1;
+}
+
+// ─── MENSAGENS DE KV STORE ───
+message PutRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message PutResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetRequest {
+  string key = 1;
+}
+
+message GetResponse {
+  string value = 1;
+  bool found = 2;
+}
+
+// ─── SERVIÇOS ───
+service RaftConsensus {
+  rpc RequestVote(VoteRequest) returns (VoteResponse);
+  rpc AppendEntries(AppendRequest) returns (AppendResponse);
+  rpc InstallSnapshot(InstallSnapshotRequest) returns (InstallSnapshotResponse);
+  rpc RequestPreVote(PreVoteRequest) returns (PreVoteResponse);
+}
+
+service KVStore {
+  rpc Put(PutRequest) returns (PutResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+}

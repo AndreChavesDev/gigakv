@@ -17,7 +17,6 @@ O **GigaKV** é um sistema de armazenamento Chave-Valor (Key-Value) distribuído
 - [Desafios Técnicos e Soluções](#-desafios-técnicos-e-soluções-de-implementação)
 - [Validação Prática e Relatório de Testes](#-validação-prática-e-relatório-de-testes)
 - [Guia de Execução Local](#-guia-de-execução-local)
-- [Guia de Publicação e Versionamento (Git & GitHub)](#-guia-de-publicação-e-versionamento-git--github)
 - [Trabalhos Futuros](#-trabalhos-futuros-future-work)
 - [Licença e Autoria](#-licença-e-autoria)
 
@@ -215,27 +214,6 @@ go run ./cmd/client get minha-chave
 
 ---
 
-## 📤 Guia de Publicação e Versionamento (Git & GitHub)
-
-Passos sugeridos para publicar ou atualizar este projeto no GitHub:
-
-```bash
-# Inicializar o repositório (caso ainda não exista)
-git init
-
-# Adicionar o remoto (substitua pela URL do seu repositório)
-git remote add origin https://github.com/<seu-usuario>/gigakv.git
-
-# Adicionar os arquivos ao stage
-git add .
-
-# Criar o commit
-git commit -m "feat: implementação inicial do cluster Raft com WAL e gRPC"
-
-# Enviar para o branch principal
-git branch -M main
-git push -u origin main
-```
 
 **Boas práticas recomendadas:**
 
